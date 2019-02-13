@@ -8,6 +8,7 @@ const CardsList = ({images}) =>{
             {
                 images.map((image, index) => {
                     if(index<24){
+                        // return <Card key={`card-${index}`} url={image.cover_photo.urls.raw} title={image.title}/>
                         return <Card key={`card-${index}`} url={image.url} title={image.title}/>
                     }else {
                         return;

@@ -17,9 +17,15 @@ class App extends Component{
 
         fetch('https://jsonplaceholder.typicode.com/photos')
             .then(response=> {
+
+
+                // console.log(response);
                 return response.json();
+
             }).then(photos=>{
+                // console.log(photos.results)
                 this.setState({images:photos})
+                // this.setState({images:photos.results})
             })
     }
 
