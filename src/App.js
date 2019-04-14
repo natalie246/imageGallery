@@ -1,7 +1,30 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import CardsList from './CardsList';
 import SearchBox from './SearchBox';
 import './App.css';
+import {setSearchField, requestImages} from "./actions";
+
+const mapStateToProps =state=>{
+    return{
+        searchField:state.searchImages.searchField,
+        images:state.requestImages.images,
+        isPending:state.requestImages.isPending,
+        error:state.requestImages.error
+    }
+}
+
+const mapDispatchToProps = (dispatch)=>{
+    console.log('mapDispatchToProps')
+
+    return{
+        onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+        onRequestImages: () => dispatch(requestImages())
+
+        // onSearchChange:(event)=>dispatch(setSearchField(event.target.value)),
+        // onRequestImages:() => requestImages(dispatch)
+    }
+}
 
 class App extends Component{
 
@@ -9,46 +32,33 @@ class App extends Component{
         super()
         this.state={
             images:[],
-            searchField:''
         }
     }
 
     componentDidMount(){
-
-        fetch('https://jsonplaceholder.typicode.com/photos')
-            .then(response=> {
-
-
-                // console.log(response);
-                return response.json();
-
-            }).then(photos=>{
-                // console.log(photos.results)
-                this.setState({images:photos})
-                // this.setState({images:photos.results})
-            })
+        console.log('componentDidMount')
+        this.props.onRequestImages();
     }
 
-    onSearchChange = (event) => {
-
-        this.setState({searchField:event.target.value})
-
-
-    }
     render(){
 
-        const filteredImages = this.state.images.filter(image=>{
-            return image.title.toLowerCase().includes(this.state.searchField.toLowerCase())
+
+        const {images,isPending}=this.props;
+        const filteredImages = images.filter(image=>{
+
+            return image.title.toLowerCase().includes(this.props.searchField.toLowerCase())
 
         })
 
-        return(
+        return isPending?
+            <h1>Loading...</h1>:
+            (
             <div className={'tc'}>
 
                 <h1 className={'f1'}>Image Gallery</h1>
                 <SearchBox
                     // searchField={this.state.searchField}
-                    searchChange={this.onSearchChange}
+                    searchChange={this.props.onSearchChange}
                 />
                 <CardsList images={filteredImages}/>
 
@@ -57,4 +67,4 @@ class App extends Component{
     }
 
 }
-export default App
+export default connect(mapStateToProps,mapDispatchToProps)(App);

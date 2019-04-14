@@ -11,7 +11,7 @@ const CardsList = ({images}) =>{
                         // return <Card key={`card-${index}`} url={image.cover_photo.urls.raw} title={image.title}/>
                         return <Card key={`card-${index}`} url={image.url} title={image.title}/>
                     }else {
-                        return;
+                        return '';
                     }
                 })
             }
