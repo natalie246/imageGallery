@@ -8,8 +8,8 @@ const Card = (image) =>{
             <img height={'200px'} src={image.url} alt={'img'}/>
             {console.log(image)}
             <div >
-                <h2 style={{fontSize:'12px'}}>{image.title.length>32?image.title.substring(0, 32)+'...'
-                    :image.title}</h2>
+                <h2 style={{fontSize:'12px'}}>{image.author.length>32?image.author.substring(0, 32)+'...'
+                    :image.author}</h2>
             </div>
         </div>
     );

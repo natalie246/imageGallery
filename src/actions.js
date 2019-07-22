@@ -12,9 +12,11 @@ export const setSearchField = (text) => ({
 
 
 export const requestImages = () => (dispatch) => {
-    console.log('lslsls');
+
     dispatch({type:REQUEST_IMAGES_PENDING})
-    fetch('https://jsonplaceholder.typicode.com/photos')
+    // fetch('https://jsonplaceholder.typicode.com/photos')
+    // https://picsum.photos/v2/list?page=1&limit=100
+    fetch('https://picsum.photos/v2/list?page=2&limit=70')
         .then(response=> {return response.json();})
         .then(data => dispatch({type: REQUEST_IMAGES_SUCCESS, payload: data}))
         .catch(error=> dispatch({type:REQUEST_IMAGES_FAILED,payload:error}))

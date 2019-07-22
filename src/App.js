@@ -38,6 +38,11 @@ class App extends Component{
     componentDidMount(){
         console.log('componentDidMount')
         this.props.onRequestImages();
+
+        console.log('this.props')
+        console.log(this.props)
+        console.log('this.state')
+        console.log(this.state)
     }
 
     render(){
@@ -46,7 +51,8 @@ class App extends Component{
         const {images,isPending}=this.props;
         const filteredImages = images.filter(image=>{
 
-            return image.title.toLowerCase().includes(this.props.searchField.toLowerCase())
+            console.log(image)
+            return image.author.toLowerCase().includes(this.props.searchField.toLowerCase())
 
         })
 

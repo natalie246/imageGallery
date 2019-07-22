@@ -29,10 +29,15 @@ const initialStateImages = {
 export const requestImages = (state=initialStateImages, action={}) => {
     switch (action.type) {
         case REQUEST_IMAGES_PENDING:
+            console.log('1 REQUEST_IMAGES_PENDING')
             return Object.assign({}, state, {isPending: true})
         case REQUEST_IMAGES_SUCCESS:
+            console.log('2 REQUEST_IMAGES_SUCCESS')
+            console.log(action.payload)
             return Object.assign({}, state, {images: action.payload, isPending: false})
         case REQUEST_IMAGES_FAILED:
+            console.log('3 REQUEST_IMAGES_FAILED')
+            console.log(action.payload)
             return Object.assign({}, state, {error: action.payload, isPending: false})
         default:
             return state
